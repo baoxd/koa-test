@@ -1,0 +1,10 @@
+sudo: false
+language: node_js
+node_js:
+  - "7"
+  - "8"
+before_script:
+  - npm install
+script: npm test
+after_script: npm run cov
+os: linux
