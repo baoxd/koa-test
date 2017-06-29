@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/baoxd/koa-test.svg?branch=master)](https://travis-ci.org/baoxd/koa-test)
+[![Coverage Status](https://coveralls.io/repos/github/baoxd/koa-test/badge.svg)](https://coveralls.io/github/baoxd/koa-test)
+
 # 说明
 简单的koa2框架练习，koa2相比koa在中间件实现上有较大改变，koa中间件基于generator函数、co模块实现，koa2基于async函数实现中间件的异步编程。 koa2 兼容原koa的generator函数方法，原理在于koa2的use函数将gen函数使用koa-convert包转化。 其中koa-convert的原理也是基于co模块将gen转换为Promise对象。这符合async函数执行后返回Promise的特点，从而达到兼容的目的。
 
