@@ -4,8 +4,9 @@
   "description": "koa 练习",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "cov": "./node_modules/.bin/babel-node ./node_modules/istanbul/lib/cli cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && istanbul-coveralls"
+    "test": "mocha --recursive -t 5000 --compilers js:babel-core/register ",
+    "cov": "./node_modules/.bin/babel-node ./node_modules/istanbul/lib/cli cover ./node_modules/mocha/bin/_mocha  --compilers js:babel-core/register --report lcovonly -- -R spec && istanbul-coveralls",
+    "start": "./node_modules/.bin/babel-node app.js"
   },
   "repository": {
     "type": "git",
@@ -26,8 +27,17 @@
     "babel-preset-stage-0": "^6.24.1",
     "chai": "^4.0.2",
     "coveralls": "^2.13.1",
+    "ejs": "^2.5.6",
     "istanbul": "^0.4.5",
     "istanbul-coveralls": "^1.0.3",
-    "mocha": "^3.4.2"
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^3.2.0",
+    "koa-mysql-session": "0.0.2",
+    "koa-router": "^7.2.1",
+    "koa-session-minimal": "^3.0.4",
+    "koa-static": "^3.0.0",
+    "koa-views": "^5.2.0",
+    "mocha": "^3.4.2",
+    "mysql": "^2.13.0"
   }
 }
