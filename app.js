@@ -49,8 +49,8 @@ app.use(koastatic(
   path.join( __dirname,  staticPath)
 ));
 app.use(bodyParser());
-
 app.use(router.routes()).use(router.allowedMethods());
+
 
 export default app;
 

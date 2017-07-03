@@ -7,7 +7,7 @@ class Movie {
 	constructor(options){
 	}
 
-	async index(ctx, next) {
+	async index (ctx) {
 		// ctx.body = '这是后台首页...';
 		await ctx.render('movie/index', {
 			title: '电影后台首页'
