@@ -97,13 +97,11 @@ class User {
 	/*
 		管理员权限验证
 	*/
-	async isAdmin() {
+	async isAdmin(ctx, next) {
 		let user = ctx.session.user
 
 		if(!user){
-			await ctx.render('error', {
-				msg: '请先登录，再进行此操作'
-			})
+			await ctx.redirect('/user/goLogin')
 		}else if(user.role != 1){
 			await ctx.render('error', {
 				msg: '您没有权限执行此操作'

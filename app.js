@@ -29,8 +29,8 @@ let store = new MysqlSession({
 // 存放sessionId的cookie配置
 let cookie = {
 	maxAge: 86400000,
-	expires: '',
-	path: '',
+	// expires: '',
+	path: '/',
 	domain: '',
 	httpOnly: '',
 	overwrite: '',
