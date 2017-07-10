@@ -10,6 +10,7 @@ const upload = multer({ dest: path.join(__dirname, '../', 'public/upload') });
 
 movieRouter.get("/index", movieAction.index)
 		   .get("/goAddMovie", userAction.isAdmin, movieAction.goAddMovie)
-		   .post("/movieAdd", userAction.isAdmin, upload.single('uploadPoster'), movieAction.movieAdd)
+		   .post("/movieSave", userAction.isAdmin, upload.single('uploadPoster'), movieAction.movieSave)
+		   .get("/detail/:id", movieAction.detail)
 
 export default movieRouter;

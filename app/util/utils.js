@@ -1,3 +1,6 @@
+import fs from 'fs'
+import path from 'path'
+
 // 生成主键
 let uuid = function(len) {
 	len = len ? len : 8;
@@ -10,6 +13,46 @@ let uuid = function(len) {
 	return res;
 }
 
+let upload = function(file){
+	// 上传目的文件夹
+	let destination = file.destination;
+	// 源文件名字
+	let originalname = file.originalname;
+	// 临时文件名
+	let filename = file.filename;
+	// 临时文件
+	let filepath = file.path;
+	// 文件类型
+	let mimetype = file.mimetype;
+
+	if(fs.existsSync(filepath)){
+		let newPath = path.join(destination, filename + '_' + originalname) 
+		let input = fs.createReadStream(filepath)
+		let output = fs.createWriteStream(newPath)
+
+		input.on('data', function(d){
+			output.write(d)
+		})
+
+		input.on('error', function(e){
+			// console.log(e)
+			throw e
+		})
+
+		input.on('end', function(){
+			output.end()
+			// 删除临时文件
+			fs.unlink(filepath, function(e){
+				if(e){
+					// console.log(e)
+					throw e
+				}
+			})
+		})
+	}
+}
+
 export default{
-	uuid
+	uuid,
+	upload
 }

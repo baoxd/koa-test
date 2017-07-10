@@ -18,6 +18,8 @@ app.use(views(path.join(__dirname, './app/views'), {
 	extension: 'ejs'
 }));
 
+app.use(bodyParser());
+
 // 设置session
 let store = new MysqlSession({
 	user: 'root',
@@ -48,12 +50,11 @@ app.use(session({
 app.use(koastatic(
   path.join( __dirname,  staticPath)
 ));
-app.use(bodyParser());
+
 app.use(router.routes()).use(router.allowedMethods());
 
-
-export default app;
 
 app.listen(config.port);
 console.log('Server has started: http://localhost:3000/');
 
+export default app;

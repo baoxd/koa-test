@@ -25,6 +25,16 @@ class MovieService {
 		let result = await db.updateData(this.table, movie, movie.id)
 		return result
 	}
+
+	async findAll(){
+		let _sql = `select * from ${this.table}`
+
+		return await db.query(_sql)
+	}
+	
+	async findMovieById(id){
+		return await db.findDataById(this.table, id)
+	}
 }
 
 export default new MovieService()
