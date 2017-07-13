@@ -35,6 +35,10 @@ class MovieService {
 	async findMovieById(id){
 		return await db.findDataById(this.table, id)
 	}
+
+	async deleteMovie(id){
+		return await db.deleteDataById(this.table, id)
+	}
 }
 
 export default new MovieService()

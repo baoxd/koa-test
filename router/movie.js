@@ -12,5 +12,8 @@ movieRouter.get("/index", movieAction.index)
 		   .get("/goAddMovie", userAction.isAdmin, movieAction.goAddMovie)
 		   .post("/movieSave", userAction.isAdmin, upload.single('uploadPoster'), movieAction.movieSave)
 		   .get("/detail/:id", movieAction.detail)
+		   .get("/movielist", userAction.isAdmin, movieAction.movielist)
+		   .get("/goUpdateMovie/:id", userAction.isAdmin, movieAction.goUpdateMovie)
+		   .delete("/deleteMovie", userAction.isAdmin, movieAction.deleteMovie)
 
 export default movieRouter;

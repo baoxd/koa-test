@@ -21,6 +21,18 @@ class Movie {
 		});
 	}
 
+	/*
+		电影列表
+	*/
+	async movielist(ctx){
+
+		let list = await movieService.findAll()
+
+		return await ctx.render('movie/movielist', {
+			list: list
+		})
+	}
+
 	async goAddMovie(ctx) {
 		return await ctx.render('movie/add', {
 			title: '电影添加',
@@ -71,6 +83,13 @@ class Movie {
 			msg = '电影保存失败'
 		}else{
 			// 更新
+			let result = await movieService.updateMovie(movie)
+			// console.log(result)
+			if(result && result.affectedRows >=1){
+				return await ctx.redirect('/movie/movielist')
+			}else{
+				msg = '电影更新失败'
+			}
 		}
 
 		return await ctx.render('error', {
@@ -102,6 +121,58 @@ class Movie {
 		}else{
 			await ctx.render('error', {
 				msg: '数据查询出错'
+			})
+		}
+	}
+
+	/*
+		跳转到更新
+	*/
+	async goUpdateMovie(ctx){
+		let id = ctx.params.id
+
+		if(id){
+			let movies = await movieService.findMovieById(id)
+			
+			if(movies && movies.length >0){
+				await ctx.render('movie/add', {
+					title: "电影更新",
+					movie: movies[0]
+				})
+			}else{
+				return await ctx.render('error', {
+					msg: '查询电影出错'
+				})
+			}
+
+		}else{
+			return await ctx.render('error', {
+				msg: '电影Id为空'
+			})
+		}
+	}
+
+	/*
+		删除
+	*/
+	async deleteMovie(ctx) {
+		let id = ctx.query.id
+
+		if(id){
+			let result = await movieService.deleteMovie(id)
+			// console.log(result)
+			if(result && result.affectedRows >0){
+				ctx.body = {
+					msg: true
+				}
+			}else{
+				ctx.body = {
+					msg: false
+				}
+			}
+		}else{
+			return await ctx.render('error', {
+				msg: '电影Id为空'
 			})
 		}
 	}

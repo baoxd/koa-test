@@ -6,7 +6,7 @@ $('.del').on('click',function(){
 
 	$.ajax({
 		type:'DELETE',
-		url: '/admin/movieDelete?id=' + id
+		url: '/movie/deleteMovie?id=' + id
 	}).done(function(ret){
 		if(ret && ret.msg){
 			if(tr && tr.length>0){
