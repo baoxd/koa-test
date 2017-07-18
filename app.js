@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+// import 'babel-polyfill';
 import Koa from 'koa';
 import path from 'path';
 import router from './router/index';
@@ -8,6 +8,12 @@ import session from 'koa-session-minimal';
 import MysqlSession from 'koa-mysql-session';
 import views from 'koa-views';
 import config from './config';
+
+
+function* test(){
+	yield 1
+}
+test()
 
 
 const app = new Koa();
@@ -55,6 +61,6 @@ app.use(router.routes()).use(router.allowedMethods());
 
 
 app.listen(config.port);
-console.log('Server has started: http://localhost:3000/');
+console.log(`Server has started: http://localhost:${config.port}/`);
 
 export default app;
