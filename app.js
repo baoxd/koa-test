@@ -10,11 +10,6 @@ import views from 'koa-views';
 import config from './config';
 
 
-function* test(){
-	yield 1
-}
-test()
-
 
 const app = new Koa();
 const staticPath = './public';
