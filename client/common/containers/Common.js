@@ -1,26 +1,44 @@
 import React, {Children, Component, cloneElement} from 'react'
-// import {bindActionCreators} from 'redux'
+import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import Header from '../components/Header'
+import Navbar from '../components/Navbar'
+import Main from '../components/Main'
+import actions from '../actions'
+import styles from '../sass/Common'
+import '../sass/global'
 
 class Common extends Component {
-	constructor() {
-		super()
-	}
+    constructor() {
+        super()
+    }
 
-	render() {
-		const {children, ...props} = this.props
+    render() {
+        const {children, ...props} = this.props
 
-		return (
-			<div>
-				<h1>服务端渲染测试</h1>
-				<div>
-					{Children.map(children, child =>
+        return (
+            <div className={styles.app}>
+                <Header/>
+                <Navbar/>
+                <Main>
+                    {Children.map(children, child =>
                         cloneElement(child, {...props})
                     )}
-				</div>
-			</div>
-		)
-	}
+                </Main>
+            </div>
+        )
+    }
 }
 
-export default connect(state => state)(Common)
+function mapStateToProps(state) {
+    return state
+}
+
+function mapDispatchToProps(dispatch) {
+    return {actions: bindActionCreators(actions, dispatch)}
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Common)
